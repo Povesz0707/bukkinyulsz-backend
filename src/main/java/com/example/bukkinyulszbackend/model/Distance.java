@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
@@ -23,6 +24,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Distance extends BaseEntity implements  BaseEntityInterface<Distance>{
+    private Boolean active = false;
     private String name;
     private Float length;
     private String logoUrl;
@@ -32,11 +34,13 @@ public class Distance extends BaseEntity implements  BaseEntityInterface<Distanc
     private Date startTimeTo;
     private Date timeLimit;
     private Integer price;
+    private Integer maxNumberOfCompetitor;
     @Column(length = 1000)
     private String description;
     private String gpxURL;
     private String descriptionURL;
     private String mapURL;
+    private String approach;
     private String receiptOfItinerary;
     private Date receiptOfItineraryFrom;
     private Date receiptOfItineraryTo;

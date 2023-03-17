@@ -2,10 +2,14 @@ package com.example.bukkinyulszbackend.controller;
 
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.Distance;
+import com.example.bukkinyulszbackend.model.TourEvent;
+import com.example.bukkinyulszbackend.repository.TourEventRepository;
 import com.example.bukkinyulszbackend.services.DistanceService;
 import com.example.bukkinyulszbackend.util.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +20,13 @@ import java.util.List;
 public class DistanceController extends BaseController<Distance> implements BaseControllerInterface<Distance>{
     private DistanceService distanceService;
 
+    private TourEventRepository tourEventRepository;
+
+    @Autowired
+    public void setTourEventRepository(TourEventRepository tourEventRepository) {
+        this.tourEventRepository = tourEventRepository;
+    }
+
     @Autowired
     public void setDistanceService(DistanceService distanceService) {
         this.distanceService = distanceService;
@@ -25,6 +36,13 @@ public class DistanceController extends BaseController<Distance> implements Base
     public ResponseEntity<List<Distance>> list() throws BusinessException {
         final List<Distance> distanceList = this.distanceService.list();
         return returnListResponse(distanceList);
+    }
+
+    @GetMapping(AppConstant.URI_API_LIST+"1")
+    @Transactional(rollbackFor = BusinessException.class)
+    ResponseEntity<List<TourEvent>> listTour()  throws BusinessException{
+        final List<TourEvent> list = this.tourEventRepository.findAll();
+        return ResponseEntity.ok(list);
     }
 
     @Override

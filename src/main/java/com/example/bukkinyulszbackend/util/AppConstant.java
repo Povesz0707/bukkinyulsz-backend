@@ -12,4 +12,10 @@ public class AppConstant {
     public static final String URI_API_CHECKPOINT = "checkpoint";
     public static final String URI_API_REWARD = "reward";
     public static final String URI_API_SUB_SECTION = "subSection";
+    public static final String URI_API_TOUR_EVENT_DISTANCE = "tourEventDistance";
+    public static final String URI_API_TOUR_EVENT = "tourEvent";
+    public static final String URI_API_TOUR_EVENT_GET_LATEST_ACTIVE = "getLatestActive";
+
+
+
 }

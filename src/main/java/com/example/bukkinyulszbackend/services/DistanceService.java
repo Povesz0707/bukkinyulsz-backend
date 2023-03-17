@@ -3,6 +3,7 @@ package com.example.bukkinyulszbackend.services;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.Distance;
 import com.example.bukkinyulszbackend.repository.DistanceRepository;
+import com.example.bukkinyulszbackend.repository.TourEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Transactional
 public class DistanceService implements BaseServiceInterface<Distance>{
     private DistanceRepository distanceRepository;
+
 
     @Autowired
     public void setDistanceRepository(DistanceRepository distanceRepository) {

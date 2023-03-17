@@ -24,10 +24,10 @@ public class Checkpoint extends BaseEntity implements  BaseEntityInterface<Check
     private String ellatas;
 
     @OneToOne(mappedBy = "checkpointFrom")
-    @JsonBackReference(value = "distance-sub_section")
+    @JsonBackReference(value = "distance-checkpointFrom")
     private SubSection checkpointFrom;
     @OneToOne(mappedBy = "checkpointTo")
-    @JsonBackReference(value = "distance-sub_section")
+    @JsonBackReference(value = "distance-checkpointTo")
     private SubSection checkpointTo;
 
 

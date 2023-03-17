@@ -31,6 +31,7 @@ public class MarkingService implements BaseServiceInterface<Marking>{
     @Override
     public Marking add(Marking data) throws BusinessException {
         Marking marking = this.markingRepository.save(data);
+        this.markingRepository.flush();
         return marking;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_MARKING)
-public class MarkingController implements BaseControllerInterface<Marking>{
+public class MarkingController extends BaseController<Marking> implements BaseControllerInterface<Marking>{
     private MarkingService markingService;
 
     @Autowired
@@ -24,31 +24,31 @@ public class MarkingController implements BaseControllerInterface<Marking>{
 
     @Override
     public ResponseEntity<List<Marking>> list() throws BusinessException {
-        List<Marking> markingList = this.markingService.list();
-        return ResponseEntity.ok(markingList);
+        final List<Marking> markingList = this.markingService.list();
+        return returnListResponse(markingList);
     }
 
     @Override
     public ResponseEntity<Marking> getById(long id) throws BusinessException {
-        Marking marking = this.markingService.getById(id);
-        return ResponseEntity.ok(marking);
+        final Marking marking = this.markingService.getById(id);
+        return returnSimpleResponse(marking);
     }
 
     @Override
     public ResponseEntity<Marking> add(Marking newData) throws BusinessException {
-        Marking marking = this.markingService.add(newData);
-        return ResponseEntity.ok(marking);
+        final Marking marking = this.markingService.add(newData);
+        return returnSimpleResponse(marking);
     }
 
     @Override
     public ResponseEntity<Marking> edit(Marking data) throws BusinessException {
-        Marking marking = this.markingService.edit(data);
-        return ResponseEntity.ok(marking);
+        final Marking marking = this.markingService.edit(data);
+        return returnSimpleResponse(marking);
     }
 
     @Override
     public ResponseEntity<Boolean> delete(long id) throws BusinessException {
-        Boolean result = this.markingService.delete(id);
-        return ResponseEntity.ok(result);
+        final Boolean result = this.markingService.delete(id);
+        return returnBooleanResponse(result);
     }
 }

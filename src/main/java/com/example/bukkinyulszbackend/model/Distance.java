@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,26 +22,33 @@ import java.util.Set;
 @Where(clause = "enabled = true")
 @Getter
 @Setter
-@ToString
 public class Distance extends BaseEntity implements  BaseEntityInterface<Distance>{
     private String name;
     private Float length;
-    private Float gain;
+    private String logoUrl;
     private String startPlace;
     private String finishPlace;
-    private Date startTime;
-    private Date finishDate;
+    private Date startTimeFrom;
+    private Date startTimeTo;
     private Date timeLimit;
-    private Reward reward;
     private Integer price;
-    private String descripcion;
+    @Column(length = 1000)
+    private String description;
     private String gpxURL;
-    private String turafuzetAtvetele;
-    private String idomeresModja;
-    private String szolgaltatasok;
-    private String utvonal;
+    private String descriptionURL;
+    private String mapURL;
+    private String receiptOfItinerary;
+    private Date receiptOfItineraryFrom;
+    private Date receiptOfItineraryTo;
+    private String timekeepingType;
+    private String services;
     @OneToMany(mappedBy = "distance")
-    private Set<Section> sections;
+    //@JsonManagedReference(value = "distance-sub_section")
+    private Set<SubSection> subSections;
+
+    @OneToMany(mappedBy = "distance_reward")
+    //@JsonManagedReference(value = "reward-distance")
+    private Set<Reward> rewards;
 
     @Override
     public void edit(Distance item) {

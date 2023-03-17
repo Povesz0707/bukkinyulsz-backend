@@ -31,6 +31,7 @@ public class DistanceService implements BaseServiceInterface<Distance>{
     @Override
     public Distance add(Distance data) throws BusinessException {
         Distance saved = this.distanceRepository.save(data);
+        this.distanceRepository.flush();
         return saved;
     }
 
@@ -55,7 +56,7 @@ public class DistanceService implements BaseServiceInterface<Distance>{
         Distance distance = getById(data.getId());
         distance.edit(data);
         Distance saved = this.distanceRepository.save(distance);
-        this.distanceRepository.findAll();
+        this.distanceRepository.flush();
         return saved;
     }
 }

@@ -13,8 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_DISTANCE)
-public class DistanceController implements BaseControllerInterface<Distance>{
-
+public class DistanceController extends BaseController<Distance> implements BaseControllerInterface<Distance>{
     private DistanceService distanceService;
 
     @Autowired
@@ -24,31 +23,31 @@ public class DistanceController implements BaseControllerInterface<Distance>{
 
     @Override
     public ResponseEntity<List<Distance>> list() throws BusinessException {
-        List<Distance> distanceList = this.distanceService.list();
-        return ResponseEntity.ok(distanceList);
+        final List<Distance> distanceList = this.distanceService.list();
+        return returnListResponse(distanceList);
     }
 
     @Override
     public ResponseEntity<Distance> getById(long id) throws BusinessException {
-        Distance distance = this.distanceService.getById(id);
-        return ResponseEntity.ok(distance);
+        final Distance distance = this.distanceService.getById(id);
+        return returnSimpleResponse(distance);
     }
 
     @Override
     public ResponseEntity<Distance> add(Distance newData) throws BusinessException {
-        Distance saved = this.distanceService.add(newData);
-        return ResponseEntity.ok(saved);
+        final Distance saved = this.distanceService.add(newData);
+        return returnSimpleResponse(saved);
     }
 
     @Override
     public ResponseEntity<Distance> edit(Distance data) throws BusinessException {
-        Distance saved = this.distanceService.edit(data);
-        return ResponseEntity.ok(saved);
+        final Distance saved = this.distanceService.edit(data);
+        return returnSimpleResponse(saved);
     }
 
     @Override
     public ResponseEntity<Boolean> delete(long id) throws BusinessException {
-        this.distanceService.delete(id);
-        return ResponseEntity.ok(true);
+        final Boolean result = this.distanceService.delete(id);
+        return returnBooleanResponse(result);
     }
 }

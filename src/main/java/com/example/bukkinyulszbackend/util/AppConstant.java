@@ -7,7 +7,9 @@ public class AppConstant {
     public static final String URI_API_ADD = "add";
     public static final String URI_API_EDIT = "edit";
     public static final String URI_API_DELETE = "delete";
-
     public static final String URI_API_DISTANCE = "distance";
     public static final String URI_API_MARKING = "marking";
+    public static final String URI_API_CHECKPOINT = "checkpoint";
+    public static final String URI_API_REWARD = "reward";
+    public static final String URI_API_SUB_SECTION = "subSection";
 }

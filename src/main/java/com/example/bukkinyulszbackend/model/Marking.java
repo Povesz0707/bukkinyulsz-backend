@@ -19,15 +19,11 @@ import org.hibernate.annotations.Where;
 @Where(clause = "enabled = true")
 @Getter
 @Setter
-@ToString
 public class Marking extends BaseEntity implements BaseEntityInterface<Marking>{
     private String name;
     private String url;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "section_id", columnDefinition = "bigint", nullable = false, referencedColumnName = "section_id")
-    @JsonBackReference(value = "marking_section")
-    private Section section;
+
 
     @Override
     public void edit(Marking item) {

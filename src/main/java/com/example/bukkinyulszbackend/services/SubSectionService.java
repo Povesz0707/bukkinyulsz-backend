@@ -55,7 +55,7 @@ public class SubSectionService implements BaseServiceInterface<SubSection>{
     @Override
     public SubSection edit(SubSection data) throws BusinessException {
         SubSection subSection = getById(data.getId());
-        subSection.edit(subSection);
+        subSection.edit(data);
         SubSection saveDSubSection = this.subSectionRepository.save(subSection);
         this.subSectionRepository.flush();
         return saveDSubSection;

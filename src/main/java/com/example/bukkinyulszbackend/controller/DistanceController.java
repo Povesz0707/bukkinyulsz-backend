@@ -48,6 +48,7 @@ public class DistanceController extends BaseController<Distance> implements Base
     @Override
     public ResponseEntity<Distance> getById(long id) throws BusinessException {
         final Distance distance = this.distanceService.getById(id);
+        System.out.println(distance.getName());
         return returnSimpleResponse(distance);
     }
 

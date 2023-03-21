@@ -23,16 +23,20 @@ public class Checkpoint extends BaseEntity implements  BaseEntityInterface<Check
     private String name;
     private String ellatas;
 
+    private Boolean isMainCheckpoint = false;
+
     @OneToOne(mappedBy = "checkpointFrom")
-    @JsonBackReference(value = "distance-checkpointFrom")
+    @JsonBackReference(value = "subSection-checkpointFrom")
     private SubSection checkpointFrom;
     @OneToOne(mappedBy = "checkpointTo")
-    @JsonBackReference(value = "distance-checkpointTo")
+    @JsonBackReference(value = "subSection-checkpointTo")
     private SubSection checkpointTo;
 
 
     @Override
     public void edit(Checkpoint item) {
-
+        this.name = item.getName();
+        this.ellatas = item.getEllatas();
+        this.isMainCheckpoint = item.getIsMainCheckpoint();
     }
 }

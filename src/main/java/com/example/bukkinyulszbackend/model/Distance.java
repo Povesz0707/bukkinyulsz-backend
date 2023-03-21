@@ -11,6 +11,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,8 +24,8 @@ import java.util.Set;
 @Where(clause = "enabled = true")
 @Getter
 @Setter
+@ToString
 public class Distance extends BaseEntity implements  BaseEntityInterface<Distance>{
-    private Boolean active = false;
     private String name;
     private Float length;
     private String logoUrl;
@@ -46,16 +47,38 @@ public class Distance extends BaseEntity implements  BaseEntityInterface<Distanc
     private Date receiptOfItineraryTo;
     private String timekeepingType;
     private String services;
-    @OneToMany(mappedBy = "distance")
-    //@JsonManagedReference(value = "distance-sub_section")
-    private Set<SubSection> subSections;
 
     @OneToMany(mappedBy = "distance_reward")
     //@JsonManagedReference(value = "reward-distance")
     private Set<Reward> rewards;
 
+    @OneToMany(mappedBy = "distance")
+    @Where(clause = BaseEntity.WHERE)
+    private List<DistanceSubsection> distanceSubsections;
+
     @Override
     public void edit(Distance item) {
-
+        this.name = item.getName();
+        this.length = item.getLength();
+        this.logoUrl = item.getLogoUrl();
+        this.startPlace = item.getStartPlace();
+        this.finishPlace = item.getFinishPlace();
+        this.startTimeFrom = item.getStartTimeFrom();
+        this.startTimeTo = item.getStartTimeTo();
+        this.timeLimit = item.getTimeLimit();
+        this.price = item.getPrice();
+        this.maxNumberOfCompetitor = item.getMaxNumberOfCompetitor();
+        this.description = item.getDescription();
+        this.gpxURL = item.getGpxURL();
+        this.descriptionURL = item.getDescriptionURL();
+        this.mapURL = item.getMapURL();
+        this.approach = item.getApproach();
+        this.receiptOfItinerary = item.getReceiptOfItinerary();
+        this.receiptOfItineraryFrom = item.getReceiptOfItineraryFrom();
+        this.receiptOfItineraryTo = item.getReceiptOfItineraryTo();
+        this.timekeepingType = item.getTimekeepingType();
+        this.services = item.getServices();
     }
+
+
 }

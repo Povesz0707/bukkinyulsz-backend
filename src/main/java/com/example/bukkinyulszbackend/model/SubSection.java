@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,26 +25,31 @@ import java.util.Set;
 @Setter
 public class SubSection extends BaseEntity implements BaseEntityInterface<SubSection>{
     private Integer position;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "checkpointFrom_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "checkpoint_id")
     private Checkpoint checkpointFrom;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "checkpointTo_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "checkpoint_id")
     private Checkpoint checkpointTo;
     private Float subLength;
     private Float subElevationGain;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+/*    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "distance_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "distance_id")
     @JsonBackReference(value = "distance-sub_section")
-    private Distance distance;
+    private Distance distance;*/
 
     @OneToMany(mappedBy = "subSection")
     private Set<SubSectionMarking> markings;
 
+/*    @ManyToOne(optional = true)
+    @JoinColumn(name = "distance_sub_section_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "distance_sub_section_id")
+    private DistanceSubsection distanceSubsection;*/
+
     @Override
     public void edit(SubSection item) {
+        this.checkpointFrom = item.getCheckpointFrom();
+        this.checkpointTo = item.getCheckpointTo();
 
     }
 }

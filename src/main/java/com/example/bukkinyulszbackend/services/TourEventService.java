@@ -1,8 +1,6 @@
 package com.example.bukkinyulszbackend.services;
 
 import com.example.bukkinyulszbackend.exception.BusinessException;
-import com.example.bukkinyulszbackend.model.Reward;
-import com.example.bukkinyulszbackend.model.SubSection;
 import com.example.bukkinyulszbackend.model.TourEvent;
 import com.example.bukkinyulszbackend.repository.TourEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +55,8 @@ public class TourEventService implements BaseServiceInterface<TourEvent>{
     @Override
     public TourEvent edit(TourEvent data) throws BusinessException {
         TourEvent tourEvent = getById(data.getId());
-        tourEvent.edit(tourEvent);
+        tourEvent.edit(data);
+        System.out.println(tourEvent.getApplicationFrom());
         TourEvent savedTourEvent = this.tourEventRepository.save(tourEvent);
         this.tourEventRepository.flush();
         return savedTourEvent;
@@ -68,9 +67,22 @@ public class TourEventService implements BaseServiceInterface<TourEvent>{
         TourEvent tourEvent = this.tourEventRepository.findFirstByActiveIsTrueOrderByDateOfEventDesc();
         if(tourEvent != null){
             return tourEvent;
+
+        }
+        return null;
+    }
+
+    @Transactional(rollbackFor = BusinessException.class)
+    public Boolean updateActiveStatus(List<TourEvent> tourEventList, Boolean activeStatus)  throws BusinessException{
+        if(tourEventList != null && !tourEventList.isEmpty()){
+            for(TourEvent tourEvent : tourEventList){
+                tourEvent.setActive(activeStatus);
+                this.edit(tourEvent);
+            }
+            return true;
         }
         else{
-            throw new BusinessException(BusinessException.HANDLED_EXCEPTION_TYPE_ITEM_NOT_FOUND);
+            throw new BusinessException(BusinessException.HANDLED_EXCEPTION_TYPE_LIST_IS_EMPTY_OR_NULL);
         }
     }
 }

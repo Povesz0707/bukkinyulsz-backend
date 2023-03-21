@@ -10,9 +10,7 @@ import com.example.bukkinyulszbackend.util.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,6 +44,7 @@ public class TourEventController extends BaseController<TourEvent> implements Ba
 
     @Override
     public ResponseEntity<TourEvent> edit(TourEvent data) throws BusinessException {
+        System.out.println("edit called");
         final TourEvent tourEvent = this.tourEventService.edit(data);
         return returnSimpleResponse(tourEvent);
     }
@@ -59,8 +58,14 @@ public class TourEventController extends BaseController<TourEvent> implements Ba
     @GetMapping(AppConstant.URI_API_GET + "/"+AppConstant.URI_API_TOUR_EVENT_GET_LATEST_ACTIVE)
     @Transactional(rollbackFor = BusinessException.class)
     ResponseEntity<TourEvent> getLatestActive()  throws BusinessException{
-        System.out.println("CALLED");
         final TourEvent tourEvent = this.tourEventService.getLatestActive();
         return returnSimpleResponse(tourEvent);
+    }
+
+    @PostMapping(AppConstant.URI_API_UPDATE_ACTIVE_STATUS+"/{status}")
+    @Transactional(rollbackFor = BusinessException.class)
+    ResponseEntity<Boolean> updateActiveStatus(@PathVariable final Boolean status,@RequestBody final List<TourEvent> tourEventList)  throws BusinessException{
+        final Boolean result = this.tourEventService.updateActiveStatus(tourEventList, status);
+        return returnBooleanResponse(result);
     }
 }

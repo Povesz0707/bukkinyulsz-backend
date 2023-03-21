@@ -31,6 +31,7 @@ public class TourEventDistance extends BaseEntity implements  BaseEntityInterfac
     private Distance distance;
     @Override
     public void edit(TourEventDistance item) {
-
+        this.tourEvent = item.getTourEvent();
+        this.distance = item.getDistance();
     }
 }

@@ -48,6 +48,7 @@ public class DistanceService implements BaseServiceInterface<Distance>{
         Optional<Distance> distanceOptional = this.distanceRepository.findById(id);
         if(distanceOptional.isPresent()){
             Distance distance = distanceOptional.get();
+            System.out.println(distance);
             return distance;
         }
         return null;

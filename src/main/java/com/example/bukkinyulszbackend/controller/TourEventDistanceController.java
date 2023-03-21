@@ -1,19 +1,13 @@
 package com.example.bukkinyulszbackend.controller;
 
 import com.example.bukkinyulszbackend.exception.BusinessException;
-import com.example.bukkinyulszbackend.model.Reward;
-import com.example.bukkinyulszbackend.model.SubSection;
-import com.example.bukkinyulszbackend.model.TourEvent;
-import com.example.bukkinyulszbackend.model.TourEventDistance;
+import com.example.bukkinyulszbackend.model.*;
 import com.example.bukkinyulszbackend.services.TourEventDistanceService;
 import com.example.bukkinyulszbackend.util.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -57,5 +51,18 @@ public class TourEventDistanceController extends BaseController<TourEventDistanc
         return returnBooleanResponse(result);
     }
 
+    @PostMapping(AppConstant.URI_API_GET_BY+"/"+AppConstant.URI_API_DISTANCE)
+    @Transactional(rollbackFor = BusinessException.class)
+    ResponseEntity<List<TourEventDistance>> findAllByDistance(@RequestBody final Distance distance)  throws BusinessException{
+        List<TourEventDistance> tourEventDistances = this.tourEventDistanceService.findAllByDistance(distance);
+        return returnListResponse(tourEventDistances);
+    }
+
+    @PostMapping(AppConstant.URI_API_GET_BY+"/"+AppConstant.URI_API_TOUR_EVENT)
+    @Transactional(rollbackFor = BusinessException.class)
+    ResponseEntity<List<TourEventDistance>> findAllByTourEvent(@RequestBody final TourEvent tourEvent)  throws BusinessException{
+        List<TourEventDistance> tourEventDistances = this.tourEventDistanceService.findAllByTourEvent(tourEvent);
+        return returnListResponse(tourEventDistances);
+    }
 
 }

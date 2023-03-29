@@ -56,7 +56,6 @@ public class TourEventService implements BaseServiceInterface<TourEvent>{
     public TourEvent edit(TourEvent data) throws BusinessException {
         TourEvent tourEvent = getById(data.getId());
         tourEvent.edit(data);
-        System.out.println(tourEvent.getApplicationFrom());
         TourEvent savedTourEvent = this.tourEventRepository.save(tourEvent);
         this.tourEventRepository.flush();
         return savedTourEvent;
@@ -67,9 +66,23 @@ public class TourEventService implements BaseServiceInterface<TourEvent>{
         TourEvent tourEvent = this.tourEventRepository.findFirstByActiveIsTrueOrderByDateOfEventDesc();
         if(tourEvent != null){
             return tourEvent;
-
         }
         return null;
+    }
+
+    @Transactional
+    public List<TourEvent> getActives() throws BusinessException{
+        try {
+            List<TourEvent> tourEventList = this.tourEventRepository.findAllByActiveIsTrue();
+            if(tourEventList != null){
+                return tourEventList;
+            }
+            else{
+                throw new BusinessException(BusinessException.HANDLED_EXCEPTION_TYPE_LIST_IS_EMPTY_OR_NULL);
+            }
+        }catch (Exception ex){
+            throw new BusinessException(ex.getMessage(), ex);
+        }
     }
 
     @Transactional(rollbackFor = BusinessException.class)

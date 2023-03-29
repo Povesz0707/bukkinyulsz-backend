@@ -7,16 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 @Entity
 @Table(name = "tour_event")
@@ -44,17 +36,11 @@ public class TourEvent extends BaseEntity implements  BaseEntityInterface<TourEv
     @Override
     public void edit(TourEvent item) {
         this.name = item.getName();
-        this.applicationFrom = item.getApplicationFrom();
-        this.applicationTo = item.getApplicationTo();
-        this.dateOfEvent = item.getDateOfEvent();
+        this.applicationFrom = fixDateTimeZone(item.getApplicationFrom());
+        this.applicationTo = fixDateTimeZone(item.getApplicationTo());
+        this.dateOfEvent = fixDateTimeZone(item.getDateOfEvent());
         this.placeOfEvent = item.getPlaceOfEvent();
         this.active = item.getActive();
-    }
-
-    private void setDateIfNotNull(Date from, Date to){
-        if(from != null){
-
-        }
     }
 
 }

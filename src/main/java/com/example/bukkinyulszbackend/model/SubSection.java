@@ -23,6 +23,7 @@ import java.util.Set;
 @Where(clause = "enabled = true")
 @Getter
 @Setter
+@ToString
 public class SubSection extends BaseEntity implements BaseEntityInterface<SubSection>{
     private Integer position;
     @OneToOne()
@@ -34,13 +35,14 @@ public class SubSection extends BaseEntity implements BaseEntityInterface<SubSec
     private Float subLength;
     private Float subElevationGain;
 
+
 /*    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "distance_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "distance_id")
     @JsonBackReference(value = "distance-sub_section")
     private Distance distance;*/
 
     @OneToMany(mappedBy = "subSection")
-    private Set<SubSectionMarking> markings;
+    private List<SubSectionMarking> markings;
 
 /*    @ManyToOne(optional = true)
     @JoinColumn(name = "distance_sub_section_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "distance_sub_section_id")
@@ -50,6 +52,9 @@ public class SubSection extends BaseEntity implements BaseEntityInterface<SubSec
     public void edit(SubSection item) {
         this.checkpointFrom = item.getCheckpointFrom();
         this.checkpointTo = item.getCheckpointTo();
-
+        this.subLength = item.getSubLength();
+        this.subElevationGain = item.getSubElevationGain();
     }
+
+
 }

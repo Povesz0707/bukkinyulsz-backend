@@ -14,12 +14,12 @@ import org.hibernate.annotations.Where;
 @SequenceGenerator(name = "id_seq", sequenceName = "sub_section_marking_id_seq", allocationSize = 1)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @JsonPropertyOrder(alphabetic = true)
-@SQLDelete(sql = "UPDATE sub_section_marking SET enabled = false WHERE asd_id = ?")
+@SQLDelete(sql = "UPDATE sub_section_marking SET enabled = false WHERE sub_section_marking_id = ?")
 @Where(clause = "enabled = true")
 @Getter
 @Setter
 public class SubSectionMarking extends BaseEntity implements BaseEntityInterface<SubSectionMarking>{
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "sub_section_id", columnDefinition = "bigint", nullable = true, referencedColumnName = "sub_section_id")
     @JsonBackReference(value = "marking-sub_section")
     private SubSection subSection;

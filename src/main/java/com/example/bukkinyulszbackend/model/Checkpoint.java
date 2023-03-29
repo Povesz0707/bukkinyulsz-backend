@@ -32,11 +32,14 @@ public class Checkpoint extends BaseEntity implements  BaseEntityInterface<Check
     @JsonBackReference(value = "subSection-checkpointTo")
     private SubSection checkpointTo;
 
+    private String checkingType;
+
 
     @Override
     public void edit(Checkpoint item) {
         this.name = item.getName();
         this.ellatas = item.getEllatas();
         this.isMainCheckpoint = item.getIsMainCheckpoint();
+        this.checkingType = item.getCheckingType();
     }
 }

@@ -14,8 +14,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 
 @MappedSuperclass
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -149,5 +151,15 @@ public class BaseEntity implements Serializable, Comparable<BaseEntity>{
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+
+    public Date fixDateTimeZone(Date date){
+        if(date != null){
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            cal.setTime(date);
+            return cal.getTime();
+        }
+        return null;
     }
 }

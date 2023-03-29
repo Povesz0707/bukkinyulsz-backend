@@ -44,7 +44,6 @@ public class TourEventController extends BaseController<TourEvent> implements Ba
 
     @Override
     public ResponseEntity<TourEvent> edit(TourEvent data) throws BusinessException {
-        System.out.println("edit called");
         final TourEvent tourEvent = this.tourEventService.edit(data);
         return returnSimpleResponse(tourEvent);
     }
@@ -57,14 +56,22 @@ public class TourEventController extends BaseController<TourEvent> implements Ba
 
     @GetMapping(AppConstant.URI_API_GET + "/"+AppConstant.URI_API_TOUR_EVENT_GET_LATEST_ACTIVE)
     @Transactional(rollbackFor = BusinessException.class)
-    ResponseEntity<TourEvent> getLatestActive()  throws BusinessException{
+    public ResponseEntity<TourEvent> getLatestActive()  throws BusinessException{
         final TourEvent tourEvent = this.tourEventService.getLatestActive();
         return returnSimpleResponse(tourEvent);
     }
 
+    @GetMapping(AppConstant.URI_API_LIST + "/" + AppConstant.URI_API_ACTIVE)
+    @Transactional(rollbackFor = BusinessException.class)
+    public ResponseEntity<List<TourEvent>> getActives()  throws BusinessException{
+        final List<TourEvent> tourEvents = this.tourEventService.getActives();
+        return returnListResponse(tourEvents);
+    }
+
+
     @PostMapping(AppConstant.URI_API_UPDATE_ACTIVE_STATUS+"/{status}")
     @Transactional(rollbackFor = BusinessException.class)
-    ResponseEntity<Boolean> updateActiveStatus(@PathVariable final Boolean status,@RequestBody final List<TourEvent> tourEventList)  throws BusinessException{
+    public ResponseEntity<Boolean> updateActiveStatus(@PathVariable final Boolean status,@RequestBody final List<TourEvent> tourEventList)  throws BusinessException{
         final Boolean result = this.tourEventService.updateActiveStatus(tourEventList, status);
         return returnBooleanResponse(result);
     }

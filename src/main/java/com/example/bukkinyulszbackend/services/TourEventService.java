@@ -2,7 +2,9 @@ package com.example.bukkinyulszbackend.services;
 
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.TourEvent;
+import com.example.bukkinyulszbackend.model.jsonview.JsonViews;
 import com.example.bukkinyulszbackend.repository.TourEventRepository;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,7 @@ public class TourEventService implements BaseServiceInterface<TourEvent>{
         this.tourEventRepository.flush();
         return tourEvent;
     }
+
 
     @Override
     public List<TourEvent> list() throws BusinessException {

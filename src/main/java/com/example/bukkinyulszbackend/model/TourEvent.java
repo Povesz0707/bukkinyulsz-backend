@@ -27,6 +27,9 @@ public class TourEvent extends BaseEntity implements  BaseEntityInterface<TourEv
     private Date dateOfEvent;
     private String placeOfEvent;
     private Boolean active;
+    private String bannerImage;
+    private String bannerHeader;
+    private String bannerText;
 
     @OneToMany(mappedBy = "tourEvent")
     @Where(clause = BaseEntity.WHERE)
@@ -41,6 +44,9 @@ public class TourEvent extends BaseEntity implements  BaseEntityInterface<TourEv
         this.dateOfEvent = fixDateTimeZone(item.getDateOfEvent());
         this.placeOfEvent = item.getPlaceOfEvent();
         this.active = item.getActive();
+        this.bannerImage = item.getBannerImage();
+        this.bannerHeader =item.getBannerHeader();
+        this.bannerText = item.getBannerText();
     }
 
 }

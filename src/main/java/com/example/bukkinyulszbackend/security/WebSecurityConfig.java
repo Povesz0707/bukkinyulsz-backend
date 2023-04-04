@@ -1,13 +1,19 @@
 package com.example.bukkinyulszbackend.security;
 
+import com.example.bukkinyulszbackend.services.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -22,17 +28,67 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan()
+@ComponentScan(basePackages = "com.example.bukkinyulszbackend")
 public class WebSecurityConfig {
     public static final String SECURITY_ACCESS_HAS_ROLE_ADMIN = "hasRole('ADMIN')";
+
+    private static boolean enabled;
     private static String[] corsOrigins;
+
+    private AuthEntryPointJwt unauthorizedHandler;
+
+    @Autowired
+    public void setUnauthorizedHandler(AuthEntryPointJwt unauthorizedHandler) {
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
+
+    private CustomAuthenticationProvider authenticationProvider;
+
+    @Autowired
+    public void setAuthenticationProvider(CustomAuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
+    }
+
+
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    public void setCustomUserDetailsService(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
+
+    @Value("${main.security.enabled}")
+    public void setEnabled(boolean enabled) {
+        WebSecurityConfig.enabled = enabled;
+    }
+    public static boolean isEnabled() {
+        return enabled;
+    }
+
     @Value("${main.security.cors.origins}")
     public void setCorsOrigins(String[] corsOrigins) {
         WebSecurityConfig.corsOrigins = corsOrigins;
     }
+
+    public static String[] getCorsOrigins() {
+        return corsOrigins;
+    }
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
+/*    @Override
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+    }*/
+
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        if (true) {
+        if (enabled) {
             http.cors().and().csrf().disable()
 //                    .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -42,6 +98,7 @@ public class WebSecurityConfig {
                             .requestMatchers("/**").permitAll()
                             .anyRequest().authenticated()
                     );
+            http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         } else {
             http.cors().and().csrf().disable()
                     .authorizeHttpRequests()
@@ -50,6 +107,21 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsService userDetailsService)
+            throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(authenticationProvider)
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptPasswordEncoder)
+                .and()
+                .build();
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

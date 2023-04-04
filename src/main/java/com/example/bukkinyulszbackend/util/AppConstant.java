@@ -23,4 +23,7 @@ public class AppConstant {
     public static final String URI_API_DISTANCE_SUB_SECTION = "distanceSubSection";
     public static final String URI_API_FILE_STORE = "fileStore";
     public static final String URI_API_INIT = "init";
+    public static final String URI_API_USER = "user";
+    public static final String URI_LOGIN = "login";
+    public static final String URI_API_SIGN_IN = "signIn";
 }

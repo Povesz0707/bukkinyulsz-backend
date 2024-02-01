@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class TourEventService implements BaseServiceInterface<TourEvent>{
+public class TourEventService extends BaseService<TourEvent> implements BaseServiceInterface<TourEvent>{
     private TourEventRepository tourEventRepository;
 
     @Autowired
@@ -46,13 +46,7 @@ public class TourEventService implements BaseServiceInterface<TourEvent>{
     @Override
     public TourEvent getById(long id) throws BusinessException {
         Optional<TourEvent> optionalTourEvent = this.tourEventRepository.findById(id);
-        if(optionalTourEvent.isPresent()){
-            TourEvent tourEvent = optionalTourEvent.get();
-            return tourEvent;
-        }
-        else{
-            throw new BusinessException(BusinessException.HANDLED_EXCEPTION_TYPE_ITEM_NOT_FOUND);
-        }
+        return isPresent(optionalTourEvent);
     }
 
     @Override

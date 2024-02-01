@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.FileStore;
 import com.example.bukkinyulszbackend.model.payload.imageUpload.FileUploadRequest;
@@ -25,7 +26,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_FILE_STORE)
-public class FileStoreController extends BaseController<FileStore> implements BaseControllerInterface<FileStore>{
+public class FileStoreController extends BaseController<FileStore> implements BaseControllerInterface<FileStore> {
 
     private String FILE_PATH_ROOT = "C:/imageStore/";
     private FileStoreService fileStoreService;

@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.User;
 import com.example.bukkinyulszbackend.model.payload.login.JwtResponse;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_USER)
-public class UserController extends BaseController implements BaseControllerInterface<User>{
+public class UserController extends BaseController implements BaseControllerInterface<User> {
     private UserService userService;
     @Autowired
     public void setUserService(UserService userService) {

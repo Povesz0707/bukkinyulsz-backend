@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.*;
 import com.example.bukkinyulszbackend.services.DistanceSubsectionService;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_DISTANCE_SUB_SECTION)
-public class DistanceSubsectionController extends BaseController<DistanceSubsection> implements BaseControllerInterface<DistanceSubsection>{
+public class DistanceSubsectionController extends BaseController<DistanceSubsection> implements BaseControllerInterface<DistanceSubsection> {
     private DistanceSubsectionService distanceSubsectionService;
 
     @Autowired

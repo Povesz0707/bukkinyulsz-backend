@@ -15,7 +15,6 @@ import java.util.Optional;
 @Transactional
 public class RewardService implements BaseServiceInterface<Reward>{
     private RewardRepository rewardRepository;
-
     @Autowired
     public void setRewardRepository(RewardRepository rewardRepository) {
         this.rewardRepository = rewardRepository;

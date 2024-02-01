@@ -1,7 +1,7 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
-import com.example.bukkinyulszbackend.model.Distance;
 import com.example.bukkinyulszbackend.model.Marking;
 import com.example.bukkinyulszbackend.services.MarkingService;
 import com.example.bukkinyulszbackend.util.AppConstant;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_MARKING)
-public class MarkingController extends BaseController<Marking> implements BaseControllerInterface<Marking>{
+public class MarkingController extends BaseController<Marking> implements BaseControllerInterface<Marking> {
     private MarkingService markingService;
 
     @Autowired

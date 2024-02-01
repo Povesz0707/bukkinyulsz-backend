@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class MarkingService implements BaseServiceInterface<Marking>{
+public class MarkingService extends BaseService<Marking> implements BaseServiceInterface<Marking>{
     private MarkingRepository markingRepository;
 
     @Autowired
@@ -44,13 +44,7 @@ public class MarkingService implements BaseServiceInterface<Marking>{
     @Override
     public Marking getById(long id) throws BusinessException {
         Optional<Marking> optionalMarking = this.markingRepository.findById(id);
-        if(optionalMarking.isPresent()){
-            Marking marking = optionalMarking.get();
-            return marking;
-        }
-        else{
-            throw new BusinessException(BusinessException.HANDLED_EXCEPTION_TYPE_ITEM_NOT_FOUND);
-        }
+        return isPresent(optionalMarking);
     }
 
     @Override

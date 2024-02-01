@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.*;
 import com.example.bukkinyulszbackend.services.TourEventDistanceService;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_TOUR_EVENT_DISTANCE)
-public class TourEventDistanceController extends BaseController<TourEventDistance> implements BaseControllerInterface<TourEventDistance>{
+public class TourEventDistanceController extends BaseController<TourEventDistance> implements BaseControllerInterface<TourEventDistance> {
     private TourEventDistanceService tourEventDistanceService;
 
     @Autowired

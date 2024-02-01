@@ -1,10 +1,8 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
-import com.example.bukkinyulszbackend.model.Reward;
-import com.example.bukkinyulszbackend.model.SubSection;
 import com.example.bukkinyulszbackend.model.TourEvent;
-import com.example.bukkinyulszbackend.model.TourEventDistance;
 import com.example.bukkinyulszbackend.services.TourEventService;
 import com.example.bukkinyulszbackend.util.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_TOUR_EVENT)
-public class TourEventController extends BaseController<TourEvent> implements BaseControllerInterface<TourEvent>{
+public class TourEventController extends BaseController<TourEvent> implements BaseControllerInterface<TourEvent> {
     private TourEventService tourEventService;
 
     @Autowired

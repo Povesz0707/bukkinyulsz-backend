@@ -1,8 +1,8 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.Checkpoint;
-import com.example.bukkinyulszbackend.model.Marking;
 import com.example.bukkinyulszbackend.services.CheckpointService;
 import com.example.bukkinyulszbackend.util.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_CHECKPOINT)
-public class CheckpointController extends BaseController<Checkpoint> implements BaseControllerInterface<Checkpoint>{
+public class CheckpointController extends BaseController<Checkpoint> implements BaseControllerInterface<Checkpoint> {
     private CheckpointService checkpointService;
 
     @Autowired

@@ -1,9 +1,8 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
-import com.example.bukkinyulszbackend.model.Marking;
 import com.example.bukkinyulszbackend.model.Reward;
-import com.example.bukkinyulszbackend.repository.RewardRepository;
 import com.example.bukkinyulszbackend.services.RewardService;
 import com.example.bukkinyulszbackend.util.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_REWARD)
-public class RewardController extends BaseController<Reward> implements BaseControllerInterface<Reward>{
+public class RewardController extends BaseController<Reward> implements BaseControllerInterface<Reward> {
     private RewardService rewardService;
 
     @Autowired

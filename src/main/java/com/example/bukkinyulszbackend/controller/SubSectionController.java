@@ -1,7 +1,7 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
-import com.example.bukkinyulszbackend.model.Reward;
 import com.example.bukkinyulszbackend.model.SubSection;
 import com.example.bukkinyulszbackend.services.SubSectionService;
 import com.example.bukkinyulszbackend.util.AppConstant;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_SUB_SECTION)
-public class SubSectionController extends BaseController<SubSection> implements BaseControllerInterface<SubSection>{
+public class SubSectionController extends BaseController<SubSection> implements BaseControllerInterface<SubSection> {
     private SubSectionService subSectionService;
 
     @Autowired

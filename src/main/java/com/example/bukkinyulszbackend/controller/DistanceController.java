@@ -1,5 +1,6 @@
 package com.example.bukkinyulszbackend.controller;
 
+import com.example.bukkinyulszbackend.controller.interfaces.BaseControllerInterface;
 import com.example.bukkinyulszbackend.exception.BusinessException;
 import com.example.bukkinyulszbackend.model.Distance;
 import com.example.bukkinyulszbackend.model.TourEvent;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AppConstant.URI_API + "/" + AppConstant.URI_API_DISTANCE)
-public class DistanceController extends BaseController<Distance> implements BaseControllerInterface<Distance>{
+public class DistanceController extends BaseController<Distance> implements BaseControllerInterface<Distance> {
     private DistanceService distanceService;
 
     private TourEventRepository tourEventRepository;

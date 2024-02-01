@@ -1,4 +1,4 @@
-package com.example.bukkinyulszbackend.controller;
+package com.example.bukkinyulszbackend.controller.interfaces;
 
 
 import com.example.bukkinyulszbackend.exception.BusinessException;

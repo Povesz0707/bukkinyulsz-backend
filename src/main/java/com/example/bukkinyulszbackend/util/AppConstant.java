@@ -11,6 +11,7 @@ public class AppConstant {
     public static final String URI_API_DISTANCE = "distance";
     public static final String URI_API_MARKING = "marking";
     public static final String URI_API_CHECKPOINT = "checkpoint";
+    public static final String URI_API_COMPETITOR_REGISTRATION = "competitorRegistration";
     public static final String URI_API_REWARD = "reward";
     public static final String URI_API_SUB_SECTION = "subSection";
     public static final String URI_API_SUB_SECTION_MARKING = "subSectionMarking";
@@ -19,11 +20,16 @@ public class AppConstant {
     public static final String URI_API_UPDATE_ACTIVE_STATUS = "updateActiveStatus";
     public static final String URI_API_TOUR_EVENT_GET_LATEST_ACTIVE = "getLatestActive";
     public static final String URI_API_ACTIVE = "active";
-
+    public static final String URI_API_ACTIVE_3 = "active3";
     public static final String URI_API_DISTANCE_SUB_SECTION = "distanceSubSection";
     public static final String URI_API_FILE_STORE = "fileStore";
     public static final String URI_API_INIT = "init";
     public static final String URI_API_USER = "user";
     public static final String URI_LOGIN = "login";
     public static final String URI_API_SIGN_IN = "signIn";
+    public static final String URI_API_REGISTRATION = "registration";
+    public static final String URI_API_GALERY_IMAGE = "galeryImage";
+    public static final String URI_API_NEWS = "news";
+    public static final String URI_API_SPONSOR = "sponsor";
+    public static final String URI_API_TENDER = "tender";
 }

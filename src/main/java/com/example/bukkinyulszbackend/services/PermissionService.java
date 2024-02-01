@@ -22,14 +22,12 @@ public class PermissionService  extends BaseService implements BaseServiceInterf
     public Boolean delete(long id) throws BusinessException {
         return null;
     }
-
     @Override
     public Permission add(Permission data) throws BusinessException {
         Permission newPermission = this.permissionRepository.save(data);
         this.permissionRepository.flush();
         return newPermission;
     }
-
     @Override
     public List<Permission> list() throws BusinessException {
         return null;
